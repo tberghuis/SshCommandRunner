@@ -1,4 +1,4 @@
-# Ssh Command Runner
+# SSH Command Runner
 
 todo
   description
