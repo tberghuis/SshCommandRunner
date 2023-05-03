@@ -1,3 +1,7 @@
+SSH Command Runner
 
-Run a saved command on a server via SSH
+Run a saved command on a server with a single tap (via SSH).
 
+SSH Command Runner allows you to save commands and server connection settings so they can be run at will with a single tap.
+
+App is open source https://github.com/tberghuis/SshCommandRunner
