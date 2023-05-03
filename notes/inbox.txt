@@ -1,9 +1,2 @@
- cull txt
- clean code
- 
- README.md
-
-play store img link readme.md
-
-
+wait for release approval
 r / androidapps
