@@ -1,0 +1,10 @@
+deeplink to run from a json string param
+  option timeout ms
+
+possible to capture output from programs like top, htop ?
+
+add command screen
+  keyboard action - focus next field
+
+topbar back to home button
+

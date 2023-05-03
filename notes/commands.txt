@@ -1,0 +1,9 @@
+adb devices
+
+adb shell
+run-as dev.tberghuis.sshcommandrunner
+cd databases
+
+sqlite3 data.db
+.tables
+select * from command;
