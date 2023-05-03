@@ -1,0 +1,4 @@
+increment version
+build
+upload play console
+git merge master
