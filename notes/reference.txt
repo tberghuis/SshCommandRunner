@@ -1,4 +1,8 @@
+https://www.reddit.com/r/androidapps/comments/137985q/ssh_command_runner_open_source_app_to_run_a_saved/
+
+
 https://f-droid.org/en/packages/it.skarafaz.mercury/
 https://github.com/hierynomus/sshj
 
 https://github.com/smartlook/smartlook-android-amazefilemanager
+
