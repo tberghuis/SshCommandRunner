@@ -1,0 +1,11 @@
+update dependencies
+
+fun in bound foreground service
+
+port forwarding
+
+specify port connect details
+
+specify ssh private public key
+
+find reference project f-droid
