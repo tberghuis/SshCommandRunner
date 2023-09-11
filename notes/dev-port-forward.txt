@@ -3,9 +3,9 @@ fun in bound foreground service
 
 port forwarding
 
-specify port connect details
-
-specify ssh private public key
+connect details
+  port 
+  private key (file picker)
 
 find reference project f-droid
 
