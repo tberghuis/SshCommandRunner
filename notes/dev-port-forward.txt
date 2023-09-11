@@ -8,3 +8,6 @@ specify port connect details
 specify ssh private public key
 
 find reference project f-droid
+
+check if port forwarding possible with library
+prototype in compose desktop app
