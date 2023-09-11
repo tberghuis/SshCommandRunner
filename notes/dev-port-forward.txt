@@ -6,10 +6,9 @@ port forwarding
 connect details
   port 
   private key (file picker)
+    passphrase
 
 find reference project f-droid
 
 check if port forwarding possible with library
 prototype in compose desktop app
-
-...
