@@ -1,5 +1,7 @@
 
 fun in bound foreground service
+dev
+  invoke by adb cli broadcastreceiver
 
 port forwarding
 
