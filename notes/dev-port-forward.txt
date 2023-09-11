@@ -1,4 +1,3 @@
-update dependencies
 
 fun in bound foreground service
 
