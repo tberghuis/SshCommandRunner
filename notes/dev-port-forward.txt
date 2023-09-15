@@ -14,3 +14,15 @@ find reference project f-droid
 
 check if port forwarding possible with library
 prototype in compose desktop app
+
+#########################
+
+tmp package
+manifest xml
+  fresh service, activity
+  hardcode 1 feature at a time
+  invoke adb cli commands.txt (service intent)
+
+check v1.1.0 crash report
+  scope ssh connection lifetime to viewmodel
+  
