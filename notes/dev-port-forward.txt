@@ -34,3 +34,7 @@ check v1.1.0 crash report
 ...  
 
 studio bot - show example code bound service
+
+https://developer.android.com/guide/components/services
+https://developer.android.com/guide/components/bound-services
+
