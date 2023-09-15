@@ -26,3 +26,11 @@ manifest xml
 check v1.1.0 crash report
   scope ssh connection lifetime to viewmodel
   
+
+1 hardcode port forward qbittorrent
+1. service
+... bind
+... button run fuction
+...  
+
+studio bot - show example code bound service
