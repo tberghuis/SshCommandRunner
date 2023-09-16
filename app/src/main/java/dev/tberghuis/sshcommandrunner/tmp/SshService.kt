@@ -1,7 +1,6 @@
 package dev.tberghuis.sshcommandrunner.tmp
 
 import android.app.Notification
-import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
@@ -9,8 +8,16 @@ import androidx.core.app.NotificationCompat
 import dev.tberghuis.sshcommandrunner.FOREGROUND_SERVICE_NOTIFICATION_ID
 import dev.tberghuis.sshcommandrunner.NOTIFICATION_CHANNEL
 import dev.tberghuis.sshcommandrunner.util.logd
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 
 class SshService : Service() {
+
+  private val job = SupervisorJob()
+  val scope = CoroutineScope(Dispatchers.Default + job)
+
+
   override fun onBind(intent: Intent?): IBinder? {
     logd("SshService onbind")
     return null
@@ -28,10 +35,9 @@ class SshService : Service() {
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     logd("SshService onStartCommand")
-
-
     startForeground()
 
+    RunningCommand(scope)
     return START_NOT_STICKY
   }
 
