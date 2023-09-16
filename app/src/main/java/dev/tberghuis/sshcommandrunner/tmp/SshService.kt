@@ -20,6 +20,9 @@ class SshService : Service() {
 
   override fun onBind(intent: Intent?): IBinder? {
     logd("SshService onbind")
+
+
+
     return null
   }
 

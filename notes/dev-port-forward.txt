@@ -44,4 +44,6 @@ step 1,
 
 future requirement, run multiple services
 hashmap commandId -> RunningCommandState
-  
+
+
+https://developer.android.com/guide/components/foreground-services
