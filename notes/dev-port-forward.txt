@@ -45,5 +45,5 @@ step 1,
 future requirement, run multiple services
 hashmap commandId -> RunningCommandState
 
-
+https://proandroiddev.com/bound-and-foreground-services-in-android-a-step-by-step-guide-5f8362f4ae20
 https://developer.android.com/guide/components/foreground-services
