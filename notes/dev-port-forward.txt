@@ -40,4 +40,8 @@ https://developer.android.com/guide/components/bound-services
 
 step 1,
   is a foreground bound service possible
+
+
+future requirement, run multiple services
+hashmap commandId -> RunningCommandState
   
