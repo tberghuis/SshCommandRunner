@@ -31,7 +31,6 @@
         <!--   todo     to remove below-->
         <service
             android:name=".tmp.SshService"
-            android:description="run ssh command"
             android:exported="false" />
 
         <activity
