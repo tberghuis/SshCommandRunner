@@ -47,3 +47,8 @@ hashmap commandId -> RunningCommandState
 
 https://proandroiddev.com/bound-and-foreground-services-in-android-a-step-by-step-guide-5f8362f4ae20
 https://developer.android.com/guide/components/foreground-services
+
+how to do if apilevel in manifest xml
+  foregroundServiceType
+  mvp android 13 api 33
+  
