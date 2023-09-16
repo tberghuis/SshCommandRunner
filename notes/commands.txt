@@ -7,3 +7,8 @@ cd databases
 sqlite3 data.db
 .tables
 select * from command;
+
+
+####################
+
+adb shell cmd activity stop-app dev.tberghuis.sshcommandrunner
