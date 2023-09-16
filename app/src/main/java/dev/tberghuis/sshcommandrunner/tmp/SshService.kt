@@ -22,6 +22,7 @@ class SshService : Service() {
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-    return super.onStartCommand(intent, flags, startId)
+    logd("SshService onStartCommand")
+    return START_NOT_STICKY
   }
 }
