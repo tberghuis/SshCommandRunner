@@ -13,9 +13,9 @@ fun TmpScreen(
   Column {
     Text("hello tmp screen")
     Button(onClick = {
-      vm.startForeground()
+      vm.startSshService()
     }) {
-      Text("start foreground service")
+      Text("start ssh service")
     }
   }
 }
