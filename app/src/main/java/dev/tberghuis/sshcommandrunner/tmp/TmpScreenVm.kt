@@ -42,5 +42,8 @@ class TmpScreenVm(private val application: Application) : AndroidViewModel(appli
     }
   }
 
-
+  override fun onCleared() {
+    application.unbindService(connection)
+    super.onCleared()
+  }
 }
