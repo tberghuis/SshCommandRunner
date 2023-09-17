@@ -56,3 +56,5 @@ when finished with service
   Context.stopService
 
 finish reading docs
+
+DeadObjectException???

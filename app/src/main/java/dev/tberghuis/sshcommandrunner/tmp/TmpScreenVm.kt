@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 class TmpScreenVm(private val application: Application) : AndroidViewModel(application) {
 
   val sshServiceStateFlow = MutableStateFlow<SshService?>(null)
+  private val sshServiceIntent = Intent(application, SshService::class.java)
 
 
   private val connection = object : ServiceConnection {
@@ -32,9 +33,8 @@ class TmpScreenVm(private val application: Application) : AndroidViewModel(appli
 
   fun allSteps() {
     logd("TmpScreenVm allSteps")
-    val intent = Intent(application, SshService::class.java)
-    application.startForegroundService(intent)
-    application.bindService(intent, connection, 0)
+    application.startForegroundService(sshServiceIntent)
+    application.bindService(sshServiceIntent, connection, 0)
 
     viewModelScope.launch {
       val sshService = sshServiceStateFlow.filterNotNull().first()
@@ -44,6 +44,10 @@ class TmpScreenVm(private val application: Application) : AndroidViewModel(appli
 
   override fun onCleared() {
     application.unbindService(connection)
+
+    // todo this when hangup
+    //  application.stopService(sshServiceIntent)
+
     super.onCleared()
   }
 }
