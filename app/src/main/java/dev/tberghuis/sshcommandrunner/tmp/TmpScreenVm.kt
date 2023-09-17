@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class TmpScreenVm(private val application: Application) : AndroidViewModel(application) {
 
-  private val sshServiceStateFlow = MutableStateFlow<SshService?>(null)
+  val sshServiceStateFlow = MutableStateFlow<SshService?>(null)
 
 
   private val connection = object : ServiceConnection {

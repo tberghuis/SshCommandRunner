@@ -11,12 +11,17 @@ import dev.tberghuis.sshcommandrunner.NOTIFICATION_CHANNEL
 import dev.tberghuis.sshcommandrunner.util.logd
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SshService : Service() {
 
   private val job = SupervisorJob()
   val scope = CoroutineScope(Dispatchers.Default + job)
+
+  val sshServiceState = SshServiceState()
 
 
   private val binder = LocalBinder()
@@ -30,7 +35,7 @@ class SshService : Service() {
     return binder
   }
 
-  fun willitblend(){
+  fun willitblend() {
     logd("willitblend")
   }
 
@@ -48,7 +53,17 @@ class SshService : Service() {
     logd("SshService onStartCommand")
     startForeground()
 
-    RunningCommand(scope)
+    scope.launch(IO) {
+      delay(10000)
+      sshServiceState.count++
+      logd("onStartCommand 10 secs")
+      delay(10000)
+      sshServiceState.count++
+      logd("onStartCommand 20 secs")
+      delay(10000)
+      sshServiceState.count++
+      logd("onStartCommand 30 secs")
+    }
     return START_NOT_STICKY
   }
 
