@@ -51,4 +51,8 @@ https://developer.android.com/guide/components/foreground-services
 how to do if apilevel in manifest xml
   foregroundServiceType
   mvp android 13 api 33
+
+when finished with service
+  Context.stopService
+
   

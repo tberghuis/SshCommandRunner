@@ -17,5 +17,14 @@ fun TmpScreen(
     }) {
       Text("start ssh service")
     }
+
+    Button(onClick = { vm.bindSshService() }) {
+      Text("bind ssh service")
+    }
+
+    Button(onClick = { vm.willitblend() }) {
+      Text("willitblend")
+    }
+
   }
 }
