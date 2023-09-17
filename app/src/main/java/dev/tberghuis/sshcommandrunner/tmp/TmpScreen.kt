@@ -12,19 +12,12 @@ fun TmpScreen(
 ) {
   Column {
     Text("hello tmp screen")
-    Button(onClick = {
-      vm.startSshService()
-    }) {
-      Text("start ssh service")
+
+
+    Button(onClick = { vm.allSteps() }) {
+      Text("all steps")
     }
 
-    Button(onClick = { vm.bindSshService() }) {
-      Text("bind ssh service")
-    }
-
-    Button(onClick = { vm.willitblend() }) {
-      Text("willitblend")
-    }
 
   }
 }
