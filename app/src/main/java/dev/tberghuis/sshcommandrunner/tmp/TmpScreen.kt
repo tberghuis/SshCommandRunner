@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.tberghuis.sshcommandrunner.BuildConfig
 
 @Composable
 fun TmpScreen(
@@ -22,6 +23,9 @@ fun TmpScreen(
     }
 
     ViewSshServiceState()
+
+
+    Text("secret password = ${BuildConfig.tmppipassword}")
 
   }
 }
