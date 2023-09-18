@@ -31,23 +31,21 @@ class TmpScreenVm(private val application: Application) : AndroidViewModel(appli
     }
   }
 
-  fun allSteps() {
+  fun runPortForward() {
     logd("TmpScreenVm allSteps")
     application.startForegroundService(sshServiceIntent)
     application.bindService(sshServiceIntent, connection, 0)
 
     viewModelScope.launch {
       val sshService = sshServiceStateFlow.filterNotNull().first()
-      sshService.willitblend()
+      sshService.sshController.run()
     }
   }
 
   override fun onCleared() {
-    application.unbindService(connection)
-
     // todo this when hangup
+    //  application.unbindService(connection)
     //  application.stopService(sshServiceIntent)
-
     super.onCleared()
   }
 }

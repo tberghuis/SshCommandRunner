@@ -17,8 +17,8 @@ fun TmpScreen(
     Text("hello tmp screen")
 
 
-    Button(onClick = { vm.allSteps() }) {
-      Text("all steps")
+    Button(onClick = { vm.runPortForward() }) {
+      Text("run port forward")
     }
 
     ViewSshServiceState()
@@ -32,9 +32,10 @@ fun ViewSshServiceState(
 ) {
   val sshService by vm.sshServiceStateFlow.collectAsState()
   if (sshService == null) {
+    Text("ssh service NOT running")
     return
   }
-  val count = sshService!!.sshServiceState.count
+//  val count = sshService!!.sshServiceState.count
 
-  Text("count: $count")
+  Text("ssh service running")
 }

@@ -21,8 +21,9 @@ class SshService : Service() {
   private val job = SupervisorJob()
   val scope = CoroutineScope(Dispatchers.Default + job)
 
-  val sshServiceState = SshServiceState()
+//  val sshServiceState = SshServiceState()
 
+  val sshController = SshController()
 
   private val binder = LocalBinder()
 
@@ -33,10 +34,6 @@ class SshService : Service() {
   override fun onBind(intent: Intent?): IBinder? {
     logd("SshService onbind")
     return binder
-  }
-
-  fun willitblend() {
-    logd("willitblend")
   }
 
   override fun onCreate() {
@@ -53,17 +50,17 @@ class SshService : Service() {
     logd("SshService onStartCommand")
     startForeground()
 
-    scope.launch(IO) {
-      delay(10000)
-      sshServiceState.count++
-      logd("onStartCommand 10 secs")
-      delay(10000)
-      sshServiceState.count++
-      logd("onStartCommand 20 secs")
-      delay(10000)
-      sshServiceState.count++
-      logd("onStartCommand 30 secs")
-    }
+//    scope.launch(IO) {
+//      delay(10000)
+//      sshServiceState.count++
+//      logd("onStartCommand 10 secs")
+//      delay(10000)
+//      sshServiceState.count++
+//      logd("onStartCommand 20 secs")
+//      delay(10000)
+//      sshServiceState.count++
+//      logd("onStartCommand 30 secs")
+//    }
     return START_NOT_STICKY
   }
 
