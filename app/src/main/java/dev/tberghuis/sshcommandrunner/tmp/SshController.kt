@@ -57,17 +57,12 @@ class SshController(private val scope: CoroutineScope) {
     ssh.authPassword(user, password)
 
     val params = Parameters("127.0.0.1", 8081, "127.0.0.1", 8081)
-
     val ss = ServerSocket()
-
     ss.reuseAddress = true
     ss.bind(InetSocketAddress(params.localHost, params.localPort))
     ss.use { ss ->
       ssh.newLocalPortForwarder(params, ss).listen()
     }
-
-
   }
-
 
 }
