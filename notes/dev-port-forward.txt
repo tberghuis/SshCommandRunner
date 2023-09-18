@@ -75,3 +75,16 @@ next task, button to disconnect
 
 test emulator foreground service older apilevels
 
+add actions to foreground notification, 
+  hangup/disconnect, meh
+  view output, default action when tap notification
+
+mvp
+  1. rewrite same functionality as now, except foreground service
+      single ssh connection at a time
+  2. add option local port forward
+    [ ] local port forward
+        local host:
+        local port:
+        remote host:
+        remote port:
