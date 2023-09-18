@@ -64,9 +64,8 @@ set minApiLevel to 33 ???
 
 during dev hardcode ssh password
 https://github.com/google/secrets-gradle-plugin
+  remove from build.gradle after finish dev
   
 
 https://github.com/hierynomus/sshj
 learn from each example code, by implementing mvp hardcode
-
-
