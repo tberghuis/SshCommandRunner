@@ -23,7 +23,7 @@ class SshService : Service() {
 
 //  val sshServiceState = SshServiceState()
 
-  val sshController = SshController()
+  val sshController = SshController(scope)
 
   private val binder = LocalBinder()
 
