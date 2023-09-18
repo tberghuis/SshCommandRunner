@@ -72,3 +72,6 @@ learn from each example code, by implementing mvp hardcode
 
 
 next task, button to disconnect
+
+test emulator foreground service older apilevels
+
