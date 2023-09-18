@@ -69,3 +69,6 @@ https://github.com/google/secrets-gradle-plugin
 
 https://github.com/hierynomus/sshj
 learn from each example code, by implementing mvp hardcode
+
+
+next task, button to disconnect
