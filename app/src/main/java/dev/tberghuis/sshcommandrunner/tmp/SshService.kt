@@ -34,8 +34,12 @@ class SshService : Service() {
       val commandDao = (application as MyApplication).database.commandDao()
       val command = commandDao.loadCommandById(id)
       sshController = SshController(scope, command)
-      sshController!!.run()
+      sshController!!.runCommand()
     }
+  }
+
+  fun hangup() {
+    sshController!!.hangup()
   }
 
   override fun onBind(intent: Intent?): IBinder? {

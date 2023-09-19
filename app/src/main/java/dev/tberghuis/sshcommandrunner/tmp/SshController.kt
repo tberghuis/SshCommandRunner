@@ -1,5 +1,7 @@
 package dev.tberghuis.sshcommandrunner.tmp
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import dev.tberghuis.sshcommandrunner.BuildConfig
 import dev.tberghuis.sshcommandrunner.data.Command
 import dev.tberghuis.sshcommandrunner.util.logd
@@ -8,10 +10,18 @@ import java.net.ServerSocket
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.cancellable
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import net.schmizz.sshj.SSHClient
 import net.schmizz.sshj.common.IOUtils
 import net.schmizz.sshj.connection.channel.direct.Parameters
+import net.schmizz.sshj.connection.channel.direct.Session
+import net.schmizz.sshj.connection.channel.direct.Signal
 import net.schmizz.sshj.transport.verification.PromiscuousVerifier
 
 // step 1 hardcode
@@ -20,27 +30,57 @@ class SshController(
   val command: Command
 ) {
   // stick state here 1:1 mapping mvp
+  // doitwrong
+  val commandOutput = mutableStateOf(listOf<String>())
+  val error: MutableState<String?> = mutableStateOf(null)
 
-//  private val ssh = SSHClient()
-//  private var session: Session? = null
-//  private var cmd: Session.Command? = null
-//  private var cmdJob: Job? = null
-//
-//
-//  fun runCommand() {
-//
-//  }
+  private val ssh = SSHClient()
+  private var session: Session? = null
+  private var cmd: Session.Command? = null
+  private var cmdJob: Job? = null
 
-
-  fun run() {
-    logd("SshController run")
-
-    scope.launch(IO) {
-      exampleExec()
-//      exampleLocalPF()
+  fun runCommand() {
+    try {
+      ssh.addHostKeyVerifier(PromiscuousVerifier())
+      ssh.connect(command.host)
+      ssh.authPassword(command.user, command.password)
+      session = ssh.startSession()
+      cmd = session!!.exec(command.command)
+      val sshFlow = cmd!!.inputStream.bufferedReader().lineSequence().asFlow()
+      cmdJob = scope.launch(IO) {
+        sshFlow.cancellable().collect {
+          logd("line: $it")
+          commandOutput.value += it
+        }
+      }
+    } catch (e: Exception) {
+      logd("error $e")
+      error.value = e.toString()
     }
-
   }
+
+  fun hangup() {
+    scope.launch(IO) {
+      try {
+        cmd?.signal(Signal.HUP)
+        cmdJob?.cancel()
+        cmd?.join()
+        session?.close()
+        ssh.disconnect()
+      } catch (e: Exception) {
+        logd("error: $e")
+      }
+    }
+  }
+
+
+//  fun run() {
+//    logd("SshController run")
+//
+//    scope.launch(IO) {
+//      exampleExec()
+//    }
+//  }
 
   // from Exec.java
   private fun exampleExec() {
@@ -73,5 +113,13 @@ class SshController(
       ssh.newLocalPortForwarder(params, ss).listen()
     }
   }
-
 }
+
+// does something like this already exist?
+//suspend fun <T> Flow<T>.collectInto(
+//  mutableStateFlow: MutableStateFlow<T>,
+//) {
+//  collect {
+//    mutableStateFlow.value = it
+//  }
+//}

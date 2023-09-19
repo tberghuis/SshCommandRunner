@@ -42,6 +42,16 @@ class TmpScreenVm(private val application: Application) : AndroidViewModel(appli
     }
   }
 
+
+  fun hangup() {
+    logd("TmpScreenVm hangup")
+    viewModelScope.launch {
+      val sshService = sshServiceStateFlow.filterNotNull().first()
+      sshService.hangup()
+    }
+  }
+
+
   override fun onCleared() {
     // todo this when hangup
     //  application.unbindService(connection)

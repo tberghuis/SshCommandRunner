@@ -24,6 +24,11 @@ fun TmpScreen(
 
     ViewSshServiceState()
 
+    Button(onClick = { vm.hangup() }) {
+      Text("hangup")
+    }
+
+
   }
 }
 
