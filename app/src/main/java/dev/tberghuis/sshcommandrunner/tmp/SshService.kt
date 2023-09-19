@@ -18,13 +18,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SshService : Service() {
-
   private val job = SupervisorJob()
-  val scope = CoroutineScope(Dispatchers.Default + job)
+  private val scope = CoroutineScope(Dispatchers.Default + job)
 
-  private val commandDao = (application as MyApplication).database.commandDao()
-
-  //  val sshController = SshController(scope)
   var sshController: SshController? = null
 
   private val binder = LocalBinder()
@@ -35,8 +31,10 @@ class SshService : Service() {
 
   fun runCommand(id: Int) {
     scope.launch(IO) {
+      val commandDao = (application as MyApplication).database.commandDao()
       val command = commandDao.loadCommandById(id)
       sshController = SshController(scope, command)
+      sshController!!.run()
     }
   }
 
@@ -52,24 +50,13 @@ class SshService : Service() {
 
   override fun onDestroy() {
     logd("SshService ondestroy")
+    job.cancel()
     super.onDestroy()
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     logd("SshService onStartCommand")
     startForeground()
-
-//    scope.launch(IO) {
-//      delay(10000)
-//      sshServiceState.count++
-//      logd("onStartCommand 10 secs")
-//      delay(10000)
-//      sshServiceState.count++
-//      logd("onStartCommand 20 secs")
-//      delay(10000)
-//      sshServiceState.count++
-//      logd("onStartCommand 30 secs")
-//    }
     return START_NOT_STICKY
   }
 

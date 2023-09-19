@@ -17,13 +17,13 @@ import net.schmizz.sshj.transport.verification.PromiscuousVerifier
 // step 1 hardcode
 class SshController(
   private val scope: CoroutineScope,
-  command: Command
+  val command: Command
 ) {
   // stick state here 1:1 mapping mvp
 
-  val host = "192.168.0.120"
-  val user = "tom"
-  val password = BuildConfig.tmppipassword
+//  val host = "192.168.0.120"
+//  val user = "tom"
+//  val password = BuildConfig.tmppipassword
 
 
 //  private val ssh = SSHClient()
@@ -51,10 +51,10 @@ class SshController(
   private fun exampleExec() {
     val ssh = SSHClient()
     ssh.addHostKeyVerifier(PromiscuousVerifier())
-    ssh.connect(host)
-    ssh.authPassword(user, password)
+    ssh.connect(command.host)
+    ssh.authPassword(command.user, command.password)
     val session = ssh.startSession()
-    val cmd = session.exec("ping -c 1 google.com")
+    val cmd = session.exec(command.command)
     val output = IOUtils.readFully(cmd.inputStream).toString()
     logd("exampleExec output $output")
     // timeout (5) is maximum time to wait
@@ -67,8 +67,8 @@ class SshController(
   private fun exampleLocalPF() {
     val ssh = SSHClient()
     ssh.addHostKeyVerifier(PromiscuousVerifier())
-    ssh.connect(host)
-    ssh.authPassword(user, password)
+    ssh.connect(command.host)
+    ssh.authPassword(command.user, command.password)
 
     val params = Parameters("127.0.0.1", 8081, "127.0.0.1", 8081)
     val ss = ServerSocket()
