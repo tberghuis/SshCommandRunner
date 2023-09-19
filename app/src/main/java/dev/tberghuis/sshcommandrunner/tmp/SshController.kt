@@ -1,8 +1,5 @@
 package dev.tberghuis.sshcommandrunner.tmp
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import dev.tberghuis.sshcommandrunner.BuildConfig
 import dev.tberghuis.sshcommandrunner.data.Command
 import dev.tberghuis.sshcommandrunner.util.logd
 import java.net.InetSocketAddress
@@ -11,11 +8,8 @@ import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.cancellable
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import net.schmizz.sshj.SSHClient
 import net.schmizz.sshj.common.IOUtils
@@ -31,12 +25,6 @@ class SshController(
   val onError: (String) -> Unit,
   val onCommandOutputLine: (String) -> Unit,
 ) {
-  // stick state here 1:1 mapping mvp
-  // doitwrong
-  // should I just update VM state via callbacks
-//  val commandOutput = mutableStateOf(listOf<String>())
-//  val error: MutableState<String?> = mutableStateOf(null)
-
   private val ssh = SSHClient()
   private var session: Session? = null
   private var cmd: Session.Command? = null
@@ -65,6 +53,7 @@ class SshController(
   fun hangup() {
     scope.launch(IO) {
       try {
+        // i don't know what i am doing
         cmd?.signal(Signal.HUP)
         cmdJob?.cancel()
         cmd?.join()
@@ -100,7 +89,6 @@ class SshController(
     val exitStatus = cmd.exitStatus
     logd("exampleExec exitStatus $exitStatus")
   }
-
 
   private fun exampleLocalPF() {
     val ssh = SSHClient()
