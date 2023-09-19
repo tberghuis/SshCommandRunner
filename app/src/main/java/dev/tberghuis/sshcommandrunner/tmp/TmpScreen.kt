@@ -24,9 +24,6 @@ fun TmpScreen(
 
     ViewSshServiceState()
 
-
-    Text("secret password = ${BuildConfig.tmppipassword}")
-
   }
 }
 

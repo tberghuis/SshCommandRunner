@@ -21,11 +21,6 @@ class SshController(
 ) {
   // stick state here 1:1 mapping mvp
 
-//  val host = "192.168.0.120"
-//  val user = "tom"
-//  val password = BuildConfig.tmppipassword
-
-
 //  private val ssh = SSHClient()
 //  private var session: Session? = null
 //  private var cmd: Session.Command? = null
@@ -74,7 +69,7 @@ class SshController(
     val ss = ServerSocket()
     ss.reuseAddress = true
     ss.bind(InetSocketAddress(params.localHost, params.localPort))
-    ss.use { ss ->
+    ss.use {
       ssh.newLocalPortForwarder(params, ss).listen()
     }
   }
