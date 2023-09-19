@@ -92,3 +92,10 @@ room migration add port forward to command
 buy testing course PL...
 
 t. button hangup
+
+// doitwrong
+run command, if command already
+  if SshController != null
+    if command id != running command id
+      hangup
+  runCommand    
