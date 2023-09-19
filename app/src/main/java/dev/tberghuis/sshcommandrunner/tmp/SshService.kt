@@ -29,11 +29,14 @@ class SshService : Service() {
     fun getService(): SshService = this@SshService
   }
 
-  fun runCommand(id: Int) {
+  fun runCommand(
+    id: Int, onError: (String) -> Unit,
+    onCommandOutputLine: (String) -> Unit,
+  ) {
     scope.launch(IO) {
       val commandDao = (application as MyApplication).database.commandDao()
       val command = commandDao.loadCommandById(id)
-      sshController = SshController(scope, command)
+      sshController = SshController(scope, command, onError, onCommandOutputLine)
       sshController!!.runCommand()
     }
   }

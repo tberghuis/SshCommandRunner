@@ -6,6 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dev.tberghuis.sshcommandrunner.util.logd
@@ -15,6 +19,10 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class TmpScreenVm(private val application: Application) : AndroidViewModel(application) {
+
+  var commandOutput by mutableStateOf(listOf<String>())
+  var error: String? by mutableStateOf(null)
+
 
   val sshServiceStateFlow = MutableStateFlow<SshService?>(null)
   private val sshServiceIntent = Intent(application, SshService::class.java)
@@ -38,7 +46,7 @@ class TmpScreenVm(private val application: Application) : AndroidViewModel(appli
 
     viewModelScope.launch {
       val sshService = sshServiceStateFlow.filterNotNull().first()
-      sshService.runCommand(1)
+      sshService.runCommand(1, { error = it }, { commandOutput += it })
     }
   }
 

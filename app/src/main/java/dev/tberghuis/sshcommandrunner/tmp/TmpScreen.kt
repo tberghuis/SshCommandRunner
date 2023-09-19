@@ -28,7 +28,8 @@ fun TmpScreen(
       Text("hangup")
     }
 
-
+    Text("output: ${vm.commandOutput}")
+    Text("error: ${vm.error}")
   }
 }
 

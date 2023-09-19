@@ -27,12 +27,15 @@ import net.schmizz.sshj.transport.verification.PromiscuousVerifier
 // step 1 hardcode
 class SshController(
   private val scope: CoroutineScope,
-  val command: Command
+  val command: Command,
+  val onError: (String) -> Unit,
+  val onCommandOutputLine: (String) -> Unit,
 ) {
   // stick state here 1:1 mapping mvp
   // doitwrong
-  val commandOutput = mutableStateOf(listOf<String>())
-  val error: MutableState<String?> = mutableStateOf(null)
+  // should I just update VM state via callbacks
+//  val commandOutput = mutableStateOf(listOf<String>())
+//  val error: MutableState<String?> = mutableStateOf(null)
 
   private val ssh = SSHClient()
   private var session: Session? = null
@@ -50,12 +53,12 @@ class SshController(
       cmdJob = scope.launch(IO) {
         sshFlow.cancellable().collect {
           logd("line: $it")
-          commandOutput.value += it
+          onCommandOutputLine(it)
         }
       }
     } catch (e: Exception) {
       logd("error $e")
-      error.value = e.toString()
+      onError(e.toString())
     }
   }
 
