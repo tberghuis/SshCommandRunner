@@ -7,6 +7,7 @@ import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import dev.tberghuis.sshcommandrunner.FOREGROUND_SERVICE_NOTIFICATION_ID
+import dev.tberghuis.sshcommandrunner.MyApplication
 import dev.tberghuis.sshcommandrunner.NOTIFICATION_CHANNEL
 import dev.tberghuis.sshcommandrunner.util.logd
 import kotlinx.coroutines.CoroutineScope
@@ -21,14 +22,22 @@ class SshService : Service() {
   private val job = SupervisorJob()
   val scope = CoroutineScope(Dispatchers.Default + job)
 
-//  val sshServiceState = SshServiceState()
+  private val commandDao = (application as MyApplication).database.commandDao()
 
-  val sshController = SshController(scope)
+  //  val sshController = SshController(scope)
+  var sshController: SshController? = null
 
   private val binder = LocalBinder()
 
   inner class LocalBinder : Binder() {
     fun getService(): SshService = this@SshService
+  }
+
+  fun runCommand(id: Int) {
+    scope.launch(IO) {
+      val command = commandDao.loadCommandById(id)
+      sshController = SshController(scope, command)
+    }
   }
 
   override fun onBind(intent: Intent?): IBinder? {
