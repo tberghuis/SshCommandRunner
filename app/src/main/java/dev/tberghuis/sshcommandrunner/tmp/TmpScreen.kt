@@ -18,8 +18,8 @@ fun TmpScreen(
     Text("hello tmp screen")
 
 
-    Button(onClick = { vm.runPortForward() }) {
-      Text("run port forward")
+    Button(onClick = { vm.runCommand() }) {
+      Text("run command")
     }
 
     ViewSshServiceState()

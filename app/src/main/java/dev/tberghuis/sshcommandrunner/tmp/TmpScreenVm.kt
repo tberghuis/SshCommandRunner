@@ -31,8 +31,8 @@ class TmpScreenVm(private val application: Application) : AndroidViewModel(appli
     }
   }
 
-  fun runPortForward() {
-    logd("TmpScreenVm allSteps")
+  fun runCommand() {
+    logd("TmpScreenVm runCommand")
     application.startForegroundService(sshServiceIntent)
     application.bindService(sshServiceIntent, connection, 0)
 
