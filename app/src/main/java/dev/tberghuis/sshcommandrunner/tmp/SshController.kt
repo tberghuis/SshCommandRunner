@@ -1,6 +1,7 @@
 package dev.tberghuis.sshcommandrunner.tmp
 
 import dev.tberghuis.sshcommandrunner.BuildConfig
+import dev.tberghuis.sshcommandrunner.data.Command
 import dev.tberghuis.sshcommandrunner.util.logd
 import java.net.InetSocketAddress
 import java.net.ServerSocket
@@ -13,9 +14,11 @@ import net.schmizz.sshj.common.IOUtils
 import net.schmizz.sshj.connection.channel.direct.Parameters
 import net.schmizz.sshj.transport.verification.PromiscuousVerifier
 
-
 // step 1 hardcode
-class SshController(private val scope: CoroutineScope) {
+class SshController(
+  private val scope: CoroutineScope,
+  command: Command
+) {
   // stick state here 1:1 mapping mvp
 
   val host = "192.168.0.120"
@@ -23,12 +26,23 @@ class SshController(private val scope: CoroutineScope) {
   val password = BuildConfig.tmppipassword
 
 
+//  private val ssh = SSHClient()
+//  private var session: Session? = null
+//  private var cmd: Session.Command? = null
+//  private var cmdJob: Job? = null
+//
+//
+//  fun runCommand() {
+//
+//  }
+
+
   fun run() {
     logd("SshController run")
 
     scope.launch(IO) {
-//      exampleExec()
-      exampleLocalPF()
+      exampleExec()
+//      exampleLocalPF()
     }
 
   }
