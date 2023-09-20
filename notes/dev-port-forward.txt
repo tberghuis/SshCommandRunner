@@ -99,3 +99,5 @@ run command, if command already
     if command id != running command id
       hangup
   runCommand    
+
+tests.txt
