@@ -23,7 +23,7 @@ import net.schmizz.sshj.connection.channel.direct.Session
 import net.schmizz.sshj.connection.channel.direct.Signal
 import net.schmizz.sshj.transport.verification.PromiscuousVerifier
 
-class RunCommandViewModel(
+class XRunCommandViewModel(
   application: Application,
   savedStateHandle: SavedStateHandle,
 ) : AndroidViewModel(application) {

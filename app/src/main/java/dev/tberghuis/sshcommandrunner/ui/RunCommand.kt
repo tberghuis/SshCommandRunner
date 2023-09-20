@@ -24,6 +24,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.tberghuis.sshcommandrunner.tmp2.RunCommandContent
+import dev.tberghuis.sshcommandrunner.tmp2.RunCommandViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,8 +50,8 @@ fun RunCommand(
 }
 
 @Composable
-fun RunCommandContent(
-  padding: PaddingValues, vm: RunCommandViewModel
+fun XRunCommandContent(
+  padding: PaddingValues, vm: XRunCommandViewModel
 ) {
   if (vm.command == null) {
     return
