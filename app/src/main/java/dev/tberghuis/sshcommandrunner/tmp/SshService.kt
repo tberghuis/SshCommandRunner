@@ -5,6 +5,9 @@ import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.core.app.NotificationCompat
 import dev.tberghuis.sshcommandrunner.FOREGROUND_SERVICE_NOTIFICATION_ID
 import dev.tberghuis.sshcommandrunner.MyApplication
@@ -22,6 +25,8 @@ class SshService : Service() {
   private val scope = CoroutineScope(Dispatchers.Default + job)
 
   var sshController: SshController? = null
+  var commandOutput by mutableStateOf(listOf<String>())
+  var error: String? by mutableStateOf(null)
 
   private val binder = LocalBinder()
 
@@ -30,13 +35,14 @@ class SshService : Service() {
   }
 
   fun runCommand(
-    id: Int, onError: (String) -> Unit,
-    onCommandOutputLine: (String) -> Unit,
+    id: Int,
+//    onError: (String) -> Unit,
+//    onCommandOutputLine: (String) -> Unit,
   ) {
     scope.launch(IO) {
       val commandDao = (application as MyApplication).database.commandDao()
       val command = commandDao.loadCommandById(id)
-      sshController = SshController(scope, command, onError, onCommandOutputLine)
+      sshController = SshController(scope, command, { error = it }, { commandOutput += it })
       sshController!!.runCommand()
     }
   }

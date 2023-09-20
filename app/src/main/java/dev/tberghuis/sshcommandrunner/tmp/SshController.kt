@@ -22,6 +22,8 @@ import net.schmizz.sshj.transport.verification.PromiscuousVerifier
 class SshController(
   private val scope: CoroutineScope,
   val command: Command,
+  // i should probably emit to SharedFlow instead
+  // then VM collect into mutablestate, expose to UI as snapshotstate (read only)
   val onError: (String) -> Unit,
   val onCommandOutputLine: (String) -> Unit,
 ) {

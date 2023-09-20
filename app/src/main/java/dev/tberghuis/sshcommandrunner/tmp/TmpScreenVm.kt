@@ -20,8 +20,8 @@ import kotlinx.coroutines.launch
 
 class TmpScreenVm(private val application: Application) : AndroidViewModel(application) {
 
-  var commandOutput by mutableStateOf(listOf<String>())
-  var error: String? by mutableStateOf(null)
+//  var commandOutput by mutableStateOf(listOf<String>())
+//  var error: String? by mutableStateOf(null)
 
 
   val sshServiceStateFlow = MutableStateFlow<SshService?>(null)
@@ -46,7 +46,8 @@ class TmpScreenVm(private val application: Application) : AndroidViewModel(appli
 
     viewModelScope.launch {
       val sshService = sshServiceStateFlow.filterNotNull().first()
-      sshService.runCommand(1, { error = it }, { commandOutput += it })
+//      sshService.runCommand(1, { error = it }, { commandOutput += it })
+      sshService.runCommand(1)
     }
   }
 

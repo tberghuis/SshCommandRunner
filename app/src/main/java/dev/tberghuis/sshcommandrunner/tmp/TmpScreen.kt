@@ -22,14 +22,13 @@ fun TmpScreen(
       Text("run command")
     }
 
-    ViewSshServiceState()
-
     Button(onClick = { vm.hangup() }) {
       Text("hangup")
     }
 
-    Text("output: ${vm.commandOutput}")
-    Text("error: ${vm.error}")
+    ViewSshServiceState()
+
+
   }
 }
 
@@ -45,4 +44,11 @@ fun ViewSshServiceState(
 //  val count = sshService!!.sshServiceState.count
 
   Text("ssh service running")
+
+
+  Text("output: ${sshService!!.commandOutput}")
+  Text("error: ${sshService!!.error}")
+
 }
+
+
