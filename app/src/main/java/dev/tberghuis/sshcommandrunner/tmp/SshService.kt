@@ -24,7 +24,7 @@ class SshService : Service() {
   private val job = SupervisorJob()
   private val scope = CoroutineScope(Dispatchers.Default + job)
 
-  var sshController: SshController? = null
+  private var sshController: SshController? = null
   var commandOutput by mutableStateOf(listOf<String>())
   var error: String? by mutableStateOf(null)
 
