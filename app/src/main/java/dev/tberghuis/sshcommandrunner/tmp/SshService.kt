@@ -35,15 +35,16 @@ class SshService : Service() {
 
   fun runCommand(
     id: Int,
-    vmSshSessionState:SshSessionState,
+//    vmSshSessionState:SshSessionState,
+    sshSessionStateCallback: (SshSessionState) -> Unit
   ) {
     scope.launch(IO) {
       val commandDao = (application as MyApplication).database.commandDao()
       val command = commandDao.loadCommandById(id)
       sshController = SshController(scope, command)
 
-      vmSshSessionState.collectFrom(scope, sshController!!.sshSessionState)
-
+//      vmSshSessionState.collectFrom(scope, sshController!!.sshSessionState)
+      sshSessionStateCallback(sshController!!.sshSessionState)
       sshController!!.runCommand()
     }
   }

@@ -19,11 +19,11 @@ fun RunCommandContent(
 //    return
 //  }
 
-  val commandOutput by vm.vmSshSessionState.commandOutput.collectAsState()
-  val error by vm.vmSshSessionState.error.collectAsState()
+//  val commandOutput by vm.vmSshSessionState.commandOutput.collectAsState()
+//  val error by vm.vmSshSessionState.error.collectAsState()
 
   Column(Modifier.padding(padding)) {
-    Text("output: ${commandOutput}")
-    Text("error: ${error}")
+    Text("output: ${vm.commandOutput}")
+    Text("error: ${vm.error}")
   }
 }

@@ -15,20 +15,20 @@ class SshSessionState {
   val error = MutableStateFlow<String?>(null)
 
   // doitwrong
-  fun collectFrom(scope: CoroutineScope, state: SshSessionState) {
-    logd("collectFrom")
-    scope.launch {
-      state.error.collect {
-        logd("error collect")
-        error.value = it
-      }
-    }
-
-    scope.launch {
-      state.commandOutput.collect {
-        logd("commandOutput collect")
-        commandOutput.value = it
-      }
-    }
-  }
+//  fun collectFrom(scope: CoroutineScope, state: SshSessionState) {
+//    logd("collectFrom")
+//    scope.launch {
+//      state.error.collect {
+//        logd("error collect")
+//        error.value = it
+//      }
+//    }
+//
+//    scope.launch {
+//      state.commandOutput.collect {
+//        logd("commandOutput collect")
+//        commandOutput.value = it
+//      }
+//    }
+//  }
 }

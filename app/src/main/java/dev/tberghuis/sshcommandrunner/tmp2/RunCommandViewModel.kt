@@ -6,23 +6,26 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dev.tberghuis.sshcommandrunner.tmp.SshController
 import dev.tberghuis.sshcommandrunner.tmp.SshService
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class RunCommandViewModel(
   application: Application,
   savedStateHandle: SavedStateHandle,
 ) : AndroidViewModel(application) {
 
-//  val sshControllerFlow = MutableStateFlow<SshController?>(null)
-
-  val vmSshSessionState = SshSessionState()
-
-
+  //  val vmSshSessionState = SshSessionState()
+  var commandOutput by mutableStateOf(listOf<String>())
+  var error: String? by mutableStateOf(null)
 
   // do I even need hold this, should hangup through SshController
   @SuppressLint("StaticFieldLeak")
@@ -34,7 +37,10 @@ class RunCommandViewModel(
     override fun onServiceConnected(className: ComponentName, service: IBinder) {
       val binder = service as SshService.LocalBinder
       sshService = binder.getService()
-      sshService?.runCommand(checkNotNull(savedStateHandle["id"]), vmSshSessionState)
+      sshService?.runCommand(checkNotNull(savedStateHandle["id"])) { sshSessionState ->
+        sshSessionState.commandOutput.onEach { commandOutput = it }.launchIn(viewModelScope)
+        sshSessionState.error.onEach { error = it }.launchIn(viewModelScope)
+      }
     }
 
     override fun onServiceDisconnected(arg0: ComponentName) {
