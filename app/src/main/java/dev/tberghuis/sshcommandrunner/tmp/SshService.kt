@@ -33,7 +33,7 @@ class SshService : Service() {
     id: Int,
     callback: (Command, SshSessionState) -> Unit
   ) {
-
+    // continue existing session
     if (sshController != null && id == sshController!!.command.id) {
       callback(sshController!!.command, sshController!!.sshSessionState)
       return
