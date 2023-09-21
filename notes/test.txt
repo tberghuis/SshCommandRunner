@@ -9,7 +9,7 @@ dev-port-forward
 run command, exit app, return to same running command
 run command, exit app, start running different command
 
-test all emulator apilevels
+test all emulator apilevels (foreground service permission)
 [ ] 34
 [ ] 33
 [ ] 32
@@ -17,4 +17,3 @@ test all emulator apilevels
 [ ] 30
 [ ] 29
 [ ] 28
-
