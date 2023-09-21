@@ -14,11 +14,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dev.tberghuis.sshcommandrunner.data.Command
 import dev.tberghuis.sshcommandrunner.tmp.SshService
+import dev.tberghuis.sshcommandrunner.util.logd
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class RunCommandViewModel(
-  application: Application,
+  private val application: Application,
   savedStateHandle: SavedStateHandle,
 ) : AndroidViewModel(application) {
   var command: Command? by mutableStateOf(null)
@@ -55,5 +56,7 @@ class RunCommandViewModel(
 
   fun hangup() {
     sshService?.hangup()
+    application.unbindService(connection)
+    application.stopService(sshServiceIntent)
   }
 }
