@@ -10,7 +10,7 @@ run command, exit app, return to same running command
 run command, exit app, start running different command
 
 test all emulator apilevels (foreground service permission)
-[ ] 34
+[x] 34
 [x] 33
 [ ] 32
 [ ] 31
