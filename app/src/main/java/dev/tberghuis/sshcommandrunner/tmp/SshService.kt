@@ -34,10 +34,12 @@ class SshService : Service() {
     callback: (Command, SshSessionState) -> Unit
   ) {
 
-    if (sshController != null) {
+    if (sshController != null && id == sshController!!.command.id) {
       callback(sshController!!.command, sshController!!.sshSessionState)
       return
     }
+
+    sshController?.hangup()
 
     scope.launch(IO) {
       val commandDao = (application as MyApplication).database.commandDao()
