@@ -16,4 +16,4 @@ test all emulator apilevels (foreground service permission)
 [ ] 31
 [ ] 30
 [ ] 29
-[ ] 28
+[x] 28
