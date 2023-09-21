@@ -104,3 +104,5 @@ tests.txt
 write list of user actions
 come up with permutations that could be problematic
 PL testing course
+
+t. show output
