@@ -54,6 +54,6 @@ class RunCommandViewModel(
 
 
   fun hangup() {
-
+    sshService?.hangup()
   }
 }
