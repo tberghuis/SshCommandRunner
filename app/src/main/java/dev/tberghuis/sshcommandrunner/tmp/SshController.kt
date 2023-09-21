@@ -1,5 +1,8 @@
 package dev.tberghuis.sshcommandrunner.tmp
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import dev.tberghuis.sshcommandrunner.data.Command
 import dev.tberghuis.sshcommandrunner.util.logd
 import java.net.InetSocketAddress
@@ -24,9 +27,14 @@ class SshController(
   val command: Command,
   // i should probably emit to SharedFlow instead
   // then VM collect into mutablestate, expose to UI as snapshotstate (read only)
-  val onError: (String) -> Unit,
-  val onCommandOutputLine: (String) -> Unit,
+//  val onError: (String) -> Unit,
+//  val onCommandOutputLine: (String) -> Unit,
 ) {
+  // move into SshSessionState class
+  var commandOutput by mutableStateOf(listOf<String>())
+  var error: String? by mutableStateOf(null)
+
+
   private val ssh = SSHClient()
   private var session: Session? = null
   private var cmd: Session.Command? = null
@@ -43,12 +51,12 @@ class SshController(
       cmdJob = scope.launch(IO) {
         sshFlow.cancellable().collect {
           logd("line: $it")
-          onCommandOutputLine(it)
+          commandOutput += it
         }
       }
     } catch (e: Exception) {
       logd("error $e")
-      onError(e.toString())
+      error = e.toString()
     }
   }
 

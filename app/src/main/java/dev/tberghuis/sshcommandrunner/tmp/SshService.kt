@@ -25,8 +25,6 @@ class SshService : Service() {
   private val scope = CoroutineScope(Dispatchers.Default + job)
 
   private var sshController: SshController? = null
-  var commandOutput by mutableStateOf(listOf<String>())
-  var error: String? by mutableStateOf(null)
 
   private val binder = LocalBinder()
 
@@ -36,13 +34,13 @@ class SshService : Service() {
 
   fun runCommand(
     id: Int,
-//    onError: (String) -> Unit,
-//    onCommandOutputLine: (String) -> Unit,
+    sshControllerCallback: (SshController) -> Unit
   ) {
     scope.launch(IO) {
       val commandDao = (application as MyApplication).database.commandDao()
       val command = commandDao.loadCommandById(id)
-      sshController = SshController(scope, command, { error = it }, { commandOutput += it })
+      sshController = SshController(scope, command)
+      sshControllerCallback(sshController!!)
       sshController!!.runCommand()
     }
   }

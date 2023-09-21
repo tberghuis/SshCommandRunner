@@ -46,8 +46,8 @@ fun ViewSshServiceState(
   Text("ssh service running")
 
 
-  Text("output: ${sshService!!.commandOutput}")
-  Text("error: ${sshService!!.error}")
+//  Text("output: ${sshService!!.commandOutput}")
+//  Text("error: ${sshService!!.error}")
 
 }
 

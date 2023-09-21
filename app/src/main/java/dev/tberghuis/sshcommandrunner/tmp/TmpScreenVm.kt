@@ -46,8 +46,7 @@ class TmpScreenVm(private val application: Application) : AndroidViewModel(appli
 
     viewModelScope.launch {
       val sshService = sshServiceStateFlow.filterNotNull().first()
-//      sshService.runCommand(1, { error = it }, { commandOutput += it })
-      sshService.runCommand(1)
+//      sshService.runCommand(1)
     }
   }
 
