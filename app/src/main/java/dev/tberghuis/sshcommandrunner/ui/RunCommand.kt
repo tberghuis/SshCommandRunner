@@ -24,7 +24,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.tberghuis.sshcommandrunner.tmp2.RunCommandContent
 import dev.tberghuis.sshcommandrunner.tmp2.RunCommandViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,15 +49,15 @@ fun RunCommand(
 }
 
 @Composable
-fun XRunCommandContent(
-  padding: PaddingValues, vm: XRunCommandViewModel
+fun RunCommandContent(
+  padding: PaddingValues, vm: RunCommandViewModel
 ) {
   if (vm.command == null) {
     return
   }
   val command = vm.command!!
-
   val lazyListState = rememberLazyListState()
+
   LaunchedEffect(vm.commandOutput) {
     if (vm.commandOutput.lastIndex >= 0) {
       lazyListState.animateScrollToItem(vm.commandOutput.lastIndex)
@@ -91,7 +90,5 @@ fun XRunCommandContent(
         Text(vm.error!!, color = Color.Red)
       }
     }
-
-
   }
 }
