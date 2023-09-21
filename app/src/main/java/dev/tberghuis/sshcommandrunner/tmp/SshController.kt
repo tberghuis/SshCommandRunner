@@ -1,8 +1,5 @@
 package dev.tberghuis.sshcommandrunner.tmp
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import dev.tberghuis.sshcommandrunner.data.Command
 import dev.tberghuis.sshcommandrunner.tmp2.SshSessionState
 import dev.tberghuis.sshcommandrunner.util.logd
@@ -25,16 +22,8 @@ import net.schmizz.sshj.transport.verification.PromiscuousVerifier
 // step 1 hardcode
 class SshController(
   private val scope: CoroutineScope,
-  val command: Command,
-  // i should probably emit to SharedFlow instead
-  // then VM collect into mutablestate, expose to UI as snapshotstate (read only)
-//  val onError: (String) -> Unit,
-//  val onCommandOutputLine: (String) -> Unit,
+  val command: Command
 ) {
-  // move into SshSessionState class
-//  var commandOutput by mutableStateOf(listOf<String>())
-//  var error: String? by mutableStateOf(null)
-
   val sshSessionState = SshSessionState()
 
   private val ssh = SSHClient()

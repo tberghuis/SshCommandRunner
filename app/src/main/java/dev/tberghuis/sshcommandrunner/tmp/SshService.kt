@@ -5,9 +5,6 @@ import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.core.app.NotificationCompat
 import dev.tberghuis.sshcommandrunner.FOREGROUND_SERVICE_NOTIFICATION_ID
 import dev.tberghuis.sshcommandrunner.MyApplication
@@ -18,7 +15,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SshService : Service() {
@@ -35,15 +31,12 @@ class SshService : Service() {
 
   fun runCommand(
     id: Int,
-//    vmSshSessionState:SshSessionState,
     sshSessionStateCallback: (SshSessionState) -> Unit
   ) {
     scope.launch(IO) {
       val commandDao = (application as MyApplication).database.commandDao()
       val command = commandDao.loadCommandById(id)
       sshController = SshController(scope, command)
-
-//      vmSshSessionState.collectFrom(scope, sshController!!.sshSessionState)
       sshSessionStateCallback(sshController!!.sshSessionState)
       sshController!!.runCommand()
     }
