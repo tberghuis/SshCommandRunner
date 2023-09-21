@@ -106,12 +106,3 @@ class SshController(
     }
   }
 }
-
-// does something like this already exist?
-//suspend fun <T> Flow<T>.collectInto(
-//  mutableStateFlow: MutableStateFlow<T>,
-//) {
-//  collect {
-//    mutableStateFlow.value = it
-//  }
-//}

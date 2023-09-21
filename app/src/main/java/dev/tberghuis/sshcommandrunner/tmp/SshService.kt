@@ -44,7 +44,7 @@ class SshService : Service() {
   }
 
   fun hangup() {
-    sshController!!.hangup()
+    sshController?.hangup()
   }
 
   override fun onBind(intent: Intent?): IBinder? {
@@ -59,6 +59,7 @@ class SshService : Service() {
 
   override fun onDestroy() {
     logd("SshService ondestroy")
+    sshController?.hangup()
     job.cancel()
     super.onDestroy()
   }
