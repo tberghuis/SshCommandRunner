@@ -1,6 +1,5 @@
 package dev.tberghuis.sshcommandrunner.ui
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,7 +12,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -29,9 +27,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import dev.tberghuis.sshcommandrunner.util.logd
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CommandContent(
   padding: PaddingValues,
@@ -39,10 +35,8 @@ fun CommandContent(
   onDone: () -> Unit,
   action: @Composable () -> Unit
 ) {
-
   val configuration = LocalConfiguration.current
   val screenWidth = configuration.screenWidthDp
-//  logd("screenWidth $screenWidth")
 
   val columnWidth = Modifier.then(
     if (screenWidth > 500) Modifier.width(450.dp)
