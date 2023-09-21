@@ -1,7 +1,6 @@
 package dev.tberghuis.sshcommandrunner.tmp2
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,6 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
@@ -20,17 +20,17 @@ import androidx.compose.ui.text.buildAnnotatedString
 fun RunCommandContent(
   padding: PaddingValues, vm: RunCommandViewModel
 ) {
-//  Column(Modifier.padding(padding)) {
-//    Text("output: ${vm.commandOutput}")
-//    Text("error: ${vm.error}")
-//  }
-
   if (vm.command == null) {
     return
   }
   val command = vm.command!!
-
   val lazyListState = rememberLazyListState()
+
+  LaunchedEffect(vm.commandOutput) {
+    if (vm.commandOutput.lastIndex >= 0) {
+      lazyListState.animateScrollToItem(vm.commandOutput.lastIndex)
+    }
+  }
 
   LazyColumn(
     modifier = Modifier
@@ -58,9 +58,5 @@ fun RunCommandContent(
         Text(vm.error!!, color = Color.Red)
       }
     }
-
-
   }
-
-
 }
