@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import dev.tberghuis.sshcommandrunner.data.Command
 import dev.tberghuis.sshcommandrunner.tmp.SshService
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -20,6 +21,7 @@ class RunCommandViewModel(
   application: Application,
   savedStateHandle: SavedStateHandle,
 ) : AndroidViewModel(application) {
+  var command: Command? by mutableStateOf(null)
   var commandOutput by mutableStateOf(listOf<String>())
   var error: String? by mutableStateOf(null)
 
@@ -33,9 +35,10 @@ class RunCommandViewModel(
     override fun onServiceConnected(className: ComponentName, service: IBinder) {
       val binder = service as SshService.LocalBinder
       sshService = binder.getService()
-      sshService?.runCommand(checkNotNull(savedStateHandle["id"])) { sshSessionState ->
+      sshService?.runCommand(checkNotNull(savedStateHandle["id"])) { command, sshSessionState ->
         sshSessionState.commandOutput.onEach { commandOutput = it }.launchIn(viewModelScope)
         sshSessionState.error.onEach { error = it }.launchIn(viewModelScope)
+        this@RunCommandViewModel.command = command
       }
     }
 

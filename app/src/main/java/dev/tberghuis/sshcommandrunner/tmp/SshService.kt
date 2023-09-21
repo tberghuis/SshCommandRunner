@@ -9,6 +9,7 @@ import androidx.core.app.NotificationCompat
 import dev.tberghuis.sshcommandrunner.FOREGROUND_SERVICE_NOTIFICATION_ID
 import dev.tberghuis.sshcommandrunner.MyApplication
 import dev.tberghuis.sshcommandrunner.NOTIFICATION_CHANNEL
+import dev.tberghuis.sshcommandrunner.data.Command
 import dev.tberghuis.sshcommandrunner.tmp2.SshSessionState
 import dev.tberghuis.sshcommandrunner.util.logd
 import kotlinx.coroutines.CoroutineScope
@@ -31,13 +32,13 @@ class SshService : Service() {
 
   fun runCommand(
     id: Int,
-    sshSessionStateCallback: (SshSessionState) -> Unit
+    callback: (Command, SshSessionState) -> Unit
   ) {
     scope.launch(IO) {
       val commandDao = (application as MyApplication).database.commandDao()
       val command = commandDao.loadCommandById(id)
       sshController = SshController(scope, command)
-      sshSessionStateCallback(sshController!!.sshSessionState)
+      callback(command, sshController!!.sshSessionState)
       sshController!!.runCommand()
     }
   }
