@@ -12,9 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import dev.tberghuis.sshcommandrunner.tmp.SshController
 import dev.tberghuis.sshcommandrunner.tmp.SshService
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -22,8 +20,6 @@ class RunCommandViewModel(
   application: Application,
   savedStateHandle: SavedStateHandle,
 ) : AndroidViewModel(application) {
-
-  //  val vmSshSessionState = SshSessionState()
   var commandOutput by mutableStateOf(listOf<String>())
   var error: String? by mutableStateOf(null)
 
