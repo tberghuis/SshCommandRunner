@@ -25,7 +25,6 @@ class SshService : Service() {
   private var sshController: SshController? = null
 
   private val binder = LocalBinder()
-
   inner class LocalBinder : Binder() {
     fun getService(): SshService = this@SshService
   }
@@ -34,6 +33,12 @@ class SshService : Service() {
     id: Int,
     callback: (Command, SshSessionState) -> Unit
   ) {
+
+    if (sshController != null) {
+      callback(sshController!!.command, sshController!!.sshSessionState)
+      return
+    }
+
     scope.launch(IO) {
       val commandDao = (application as MyApplication).database.commandDao()
       val command = commandDao.loadCommandById(id)
