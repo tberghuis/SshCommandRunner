@@ -7,6 +7,8 @@ dev-port-forward
 ################
 
 run command, exit app, return to same running command
+run command, exit app, start running different command
+
 test all emulator apilevels
 [ ] 34
 [ ] 33
