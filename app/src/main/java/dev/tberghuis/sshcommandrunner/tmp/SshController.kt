@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import dev.tberghuis.sshcommandrunner.data.Command
+import dev.tberghuis.sshcommandrunner.tmp2.SshSessionState
 import dev.tberghuis.sshcommandrunner.util.logd
 import java.net.InetSocketAddress
 import java.net.ServerSocket
@@ -31,9 +32,10 @@ class SshController(
 //  val onCommandOutputLine: (String) -> Unit,
 ) {
   // move into SshSessionState class
-  var commandOutput by mutableStateOf(listOf<String>())
-  var error: String? by mutableStateOf(null)
+//  var commandOutput by mutableStateOf(listOf<String>())
+//  var error: String? by mutableStateOf(null)
 
+  val sshSessionState = SshSessionState()
 
   private val ssh = SSHClient()
   private var session: Session? = null
@@ -51,12 +53,12 @@ class SshController(
       cmdJob = scope.launch(IO) {
         sshFlow.cancellable().collect {
           logd("line: $it")
-          commandOutput += it
+          sshSessionState.commandOutput.value += it
         }
       }
     } catch (e: Exception) {
       logd("error $e")
-      error = e.toString()
+      sshSessionState.error.value = e.toString()
     }
   }
 

@@ -14,13 +14,16 @@ fun RunCommandContent(
   padding: PaddingValues, vm: RunCommandViewModel
 ) {
 
-  val sshController by vm.sshControllerFlow.collectAsState()
-  if (sshController == null) {
-    return
-  }
+//  val sshController by vm.sshControllerFlow.collectAsState()
+//  if (sshController == null) {
+//    return
+//  }
+
+  val commandOutput by vm.vmSshSessionState.commandOutput.collectAsState()
+  val error by vm.vmSshSessionState.error.collectAsState()
 
   Column(Modifier.padding(padding)) {
-    Text("output: ${sshController!!.commandOutput}")
-    Text("error: ${sshController!!.error}")
+    Text("output: ${commandOutput}")
+    Text("error: ${error}")
   }
 }
