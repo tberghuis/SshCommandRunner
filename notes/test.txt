@@ -6,4 +6,13 @@ all screens
 dev-port-forward
 ################
 
+run command, exit app, return to same running command
+test all emulator apilevels
+[ ] 34
+[ ] 33
+[ ] 32
+[ ] 31
+[ ] 30
+[ ] 29
+[ ] 28
 
