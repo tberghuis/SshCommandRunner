@@ -24,7 +24,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.lifecycle.viewmodel.compose.viewModel
-import dev.tberghuis.sshcommandrunner.tmp2.RunCommandViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
