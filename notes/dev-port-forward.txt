@@ -74,7 +74,7 @@ PL testing course
 cull tmp code
 
 #####################
-pre-release report stack traces
+pre-launch report stack traces
 v1.1.0 crash
 
 notification tap, navigate to running command
