@@ -1,7 +1,6 @@
 package dev.tberghuis.sshcommandrunner.service
 
 import dev.tberghuis.sshcommandrunner.data.Command
-import dev.tberghuis.sshcommandrunner.tmp2.SshSessionState
 import dev.tberghuis.sshcommandrunner.util.logd
 import java.net.InetSocketAddress
 import java.net.ServerSocket

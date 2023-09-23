@@ -1,4 +1,4 @@
-package dev.tberghuis.sshcommandrunner.tmp2
+package dev.tberghuis.sshcommandrunner.service
 
 import kotlinx.coroutines.flow.MutableStateFlow
 

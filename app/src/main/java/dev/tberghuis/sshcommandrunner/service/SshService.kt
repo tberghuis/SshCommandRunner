@@ -10,7 +10,6 @@ import dev.tberghuis.sshcommandrunner.FOREGROUND_SERVICE_NOTIFICATION_ID
 import dev.tberghuis.sshcommandrunner.MyApplication
 import dev.tberghuis.sshcommandrunner.NOTIFICATION_CHANNEL
 import dev.tberghuis.sshcommandrunner.data.Command
-import dev.tberghuis.sshcommandrunner.tmp2.SshSessionState
 import dev.tberghuis.sshcommandrunner.util.logd
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
