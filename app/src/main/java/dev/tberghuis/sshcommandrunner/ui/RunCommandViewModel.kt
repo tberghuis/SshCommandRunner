@@ -66,10 +66,12 @@ class RunCommandViewModel(
     application.bindService(sshServiceIntent, connection, 0)
   }
 
-
   fun hangup() {
-    sshService?.hangup()
-    application.unbindService(connection)
-    application.stopService(sshServiceIntent)
+    sshService?.apply {
+      hangup()
+      application.unbindService(connection)
+      application.stopService(sshServiceIntent)
+    }
+    sshService = null
   }
 }
