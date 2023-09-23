@@ -22,9 +22,9 @@ data class Command(
 
   val isLocalPortForward: Boolean = false,
   val localHost: String = "",
-  val localPort: Int = 0,
+  val localPort: String = "",
   val remoteHost: String = "",
-  val remotePort: Int = 0
+  val remotePort: String = ""
 ) {
 
   companion object {

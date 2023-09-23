@@ -2,6 +2,7 @@ package dev.tberghuis.sshcommandrunner.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -12,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -143,12 +145,32 @@ fun CommandContent(
       keyboardOptions = KeyboardOptions(
         imeAction = ImeAction.Done
       ),
-      keyboardActions = KeyboardActions(
-        onDone = { onDone() }
-      )
+      keyboardActions = KeyboardActions(onNext = {
+        localFocusManager.moveFocus(FocusDirection.Down)
+      }),
     )
 
+    Row {
+      Checkbox(
+        checked = commandScreenState.isLocalPortForward,
+        onCheckedChange = {
+          commandScreenState.isLocalPortForward = it
+        },
+      )
+      Text("Local port forward")
+    }
 
+    if (commandScreenState.isLocalPortForward) {
+      Row {
+        OutlinedTextField(
+          value=commandScreenState.localHost,
+          onValueChange:(String) -> Unit,
+        )
+      }
+      Row {
+
+      }
+    }
 
 
 

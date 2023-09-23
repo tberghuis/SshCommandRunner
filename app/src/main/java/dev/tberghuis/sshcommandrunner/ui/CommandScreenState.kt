@@ -14,6 +14,13 @@ class CommandScreenState {
 
   var passwordHidden by mutableStateOf(true)
 
+  var isLocalPortForward by mutableStateOf(false)
+  var localHost by mutableStateOf("")
+  var localPort by mutableStateOf("")
+  var remoteHost by mutableStateOf("")
+  var remotePort by mutableStateOf("")
+
+
   // doitwrong i.e. first naive sln attempt
   var errorTitle: String? by mutableStateOf(null)
   var errorHost: String? by mutableStateOf(null)
