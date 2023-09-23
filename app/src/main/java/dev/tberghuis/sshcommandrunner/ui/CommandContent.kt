@@ -150,7 +150,9 @@ fun CommandContent(
       }),
     )
 
-    Row {
+    Row(
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
       Checkbox(
         checked = commandScreenState.isLocalPortForward,
         onCheckedChange = {
