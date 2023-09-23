@@ -1,4 +1,4 @@
-package dev.tberghuis.sshcommandrunner.data
+package dev.tberghuis.sshcommandrunner.tmp2
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -11,7 +11,7 @@ import dev.tberghuis.sshcommandrunner.ui.CommandScreenState
 import kotlinx.coroutines.flow.Flow
 
 @Entity
-data class XCommand(
+data class Command(
   @PrimaryKey(autoGenerate = true) val id: Int = 0,
   val title: String,
   val host: String,
@@ -22,8 +22,8 @@ data class XCommand(
 ) {
 
   companion object {
-    fun create(id: Int = 0, css: CommandScreenState): XCommand {
-      return XCommand(
+    fun create(id: Int = 0, css: CommandScreenState): Command {
+      return Command(
         id = id,
         title = css.title,
         host = css.host,
@@ -36,21 +36,21 @@ data class XCommand(
 }
 
 @Dao
-interface XCommandDao {
+interface CommandDao {
   @Query("SELECT * FROM command")
-  fun getAll(): Flow<List<XCommand>>
+  fun getAll(): Flow<List<Command>>
 
   @Query("SELECT * FROM command where id = :id")
-  suspend fun loadCommandById(id: Int): XCommand
+  suspend fun loadCommandById(id: Int): Command
 
   @Update
-  fun update(command: XCommand)
+  fun update(command: Command)
 
   @Insert
-  fun insertAll(vararg commands: XCommand)
+  fun insertAll(vararg commands: Command)
 
   @Delete
-  fun delete(command: XCommand)
+  fun delete(command: Command)
 
   @Query("delete FROM command where id = :id")
   fun deleteById(id: Int)

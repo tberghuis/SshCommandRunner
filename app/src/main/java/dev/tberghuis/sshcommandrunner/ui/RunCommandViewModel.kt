@@ -12,8 +12,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import dev.tberghuis.sshcommandrunner.data.Command
 import dev.tberghuis.sshcommandrunner.service.SshService
+import dev.tberghuis.sshcommandrunner.tmp2.Command
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

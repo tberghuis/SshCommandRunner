@@ -8,7 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dev.tberghuis.sshcommandrunner.MyApplication
-import dev.tberghuis.sshcommandrunner.data.Command
+import dev.tberghuis.sshcommandrunner.tmp2.Command
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch

@@ -3,7 +3,7 @@ package dev.tberghuis.sshcommandrunner.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import dev.tberghuis.sshcommandrunner.data.Command
+import dev.tberghuis.sshcommandrunner.tmp2.Command
 
 class CommandScreenState {
   var title by mutableStateOf("")
