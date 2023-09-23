@@ -19,6 +19,12 @@ data class Command(
   val password: String,
   // should probably rename to commandText
   val command: String,
+
+  val isLocalPortForward: Boolean = false,
+  val localHost: String = "",
+  val localPort: Int = 0,
+  val remoteHost: String = "",
+  val remotePort: Int = 0
 ) {
 
   companion object {
