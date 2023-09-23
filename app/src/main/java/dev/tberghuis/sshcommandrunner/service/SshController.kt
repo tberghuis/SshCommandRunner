@@ -1,4 +1,4 @@
-package dev.tberghuis.sshcommandrunner.tmp
+package dev.tberghuis.sshcommandrunner.service
 
 import dev.tberghuis.sshcommandrunner.data.Command
 import dev.tberghuis.sshcommandrunner.tmp2.SshSessionState
