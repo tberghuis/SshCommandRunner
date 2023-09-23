@@ -32,7 +32,7 @@
 
         <!--   todo     to remove below-->
         <service
-            android:name=".tmp.SshService"
+            android:name=".service.SshService"
             android:exported="false" />
 
 <!--        <activity-->

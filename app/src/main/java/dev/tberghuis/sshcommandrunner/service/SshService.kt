@@ -1,4 +1,4 @@
-package dev.tberghuis.sshcommandrunner.tmp
+package dev.tberghuis.sshcommandrunner.service
 
 import android.app.Notification
 import android.app.Service
@@ -10,7 +10,6 @@ import dev.tberghuis.sshcommandrunner.FOREGROUND_SERVICE_NOTIFICATION_ID
 import dev.tberghuis.sshcommandrunner.MyApplication
 import dev.tberghuis.sshcommandrunner.NOTIFICATION_CHANNEL
 import dev.tberghuis.sshcommandrunner.data.Command
-import dev.tberghuis.sshcommandrunner.service.SshController
 import dev.tberghuis.sshcommandrunner.tmp2.SshSessionState
 import dev.tberghuis.sshcommandrunner.util.logd
 import kotlinx.coroutines.CoroutineScope
