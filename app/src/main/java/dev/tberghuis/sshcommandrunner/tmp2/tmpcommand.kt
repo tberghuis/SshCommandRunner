@@ -1,5 +1,6 @@
 package dev.tberghuis.sshcommandrunner.tmp2
 
+import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Entity
@@ -20,11 +21,11 @@ data class Command(
   // should probably rename to commandText
   val command: String,
 
-  val isLocalPortForward: Boolean = false,
-  val localHost: String = "",
-  val localPort: String = "",
-  val remoteHost: String = "",
-  val remotePort: String = ""
+  @ColumnInfo(defaultValue = "false") val isLocalPortForward: Boolean = false,
+  @ColumnInfo(defaultValue = "") val localHost: String = "",
+  @ColumnInfo(defaultValue = "") val localPort: String = "",
+  @ColumnInfo(defaultValue = "") val remoteHost: String = "",
+  @ColumnInfo(defaultValue = "") val remotePort: String = ""
 ) {
 
   companion object {

@@ -163,11 +163,35 @@ fun CommandContent(
     if (commandScreenState.isLocalPortForward) {
       Row {
         OutlinedTextField(
-          value=commandScreenState.localHost,
-          onValueChange:(String) -> Unit,
+          value = commandScreenState.localHost,
+          onValueChange = {
+            commandScreenState.localHost = it
+          },
+          label = { Text("local host") },
+        )
+        OutlinedTextField(
+          value = commandScreenState.localPort,
+          onValueChange = {
+            commandScreenState.localPort = it
+          },
+          label = { Text("local port") },
         )
       }
       Row {
+        OutlinedTextField(
+          value = commandScreenState.remoteHost,
+          onValueChange = {
+            commandScreenState.remoteHost = it
+          },
+          label = { Text("remote host") },
+        )
+        OutlinedTextField(
+          value = commandScreenState.remotePort,
+          onValueChange = {
+            commandScreenState.remotePort = it
+          },
+          label = { Text("remote port") },
+        )
 
       }
     }
