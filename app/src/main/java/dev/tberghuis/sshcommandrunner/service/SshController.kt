@@ -36,12 +36,30 @@ class SshController(
       ssh.connect(command.host)
       ssh.authPassword(command.user, command.password)
       session = ssh.startSession()
-      cmd = session!!.exec(command.command)
-      val sshFlow = cmd!!.inputStream.bufferedReader().lineSequence().asFlow()
-      cmdJob = scope.launch(IO) {
-        sshFlow.cancellable().collect {
-          logd("line: $it")
-          sshSessionState.commandOutput.value += it
+
+      if (!command.command.isNullOrBlank()) {
+        cmd = session!!.exec(command.command)
+        val sshFlow = cmd!!.inputStream.bufferedReader().lineSequence().asFlow()
+        cmdJob = scope.launch(IO) {
+          sshFlow.cancellable().collect {
+            logd("line: $it")
+            sshSessionState.commandOutput.value += it
+          }
+        }
+      }
+      if (command.isLocalPortForward) {
+        val params =
+          Parameters(
+            command.localHost,
+            command.localPort.toInt(),
+            command.remoteHost,
+            command.remotePort.toInt()
+          )
+        val ss = ServerSocket()
+        ss.reuseAddress = true
+        ss.bind(InetSocketAddress(params.localHost, params.localPort))
+        ss.use {
+          ssh.newLocalPortForwarder(params, ss).listen()
         }
       }
     } catch (e: Exception) {
