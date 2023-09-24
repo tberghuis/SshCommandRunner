@@ -82,44 +82,4 @@ class SshController(
       }
     }
   }
-
-
-//  fun run() {
-//    logd("SshController run")
-//
-//    scope.launch(IO) {
-//      exampleExec()
-//    }
-//  }
-
-  // from Exec.java
-  private fun exampleExec() {
-    val ssh = SSHClient()
-    ssh.addHostKeyVerifier(PromiscuousVerifier())
-    ssh.connect(command.host)
-    ssh.authPassword(command.user, command.password)
-    val session = ssh.startSession()
-    val cmd = session.exec(command.command)
-    val output = IOUtils.readFully(cmd.inputStream).toString()
-    logd("exampleExec output $output")
-    // timeout (5) is maximum time to wait
-    cmd.join(5, TimeUnit.SECONDS)
-    val exitStatus = cmd.exitStatus
-    logd("exampleExec exitStatus $exitStatus")
-  }
-
-  private fun exampleLocalPF() {
-    val ssh = SSHClient()
-    ssh.addHostKeyVerifier(PromiscuousVerifier())
-    ssh.connect(command.host)
-    ssh.authPassword(command.user, command.password)
-
-    val params = Parameters("127.0.0.1", 8081, "127.0.0.1", 8081)
-    val ss = ServerSocket()
-    ss.reuseAddress = true
-    ss.bind(InetSocketAddress(params.localHost, params.localPort))
-    ss.use {
-      ssh.newLocalPortForwarder(params, ss).listen()
-    }
-  }
 }
