@@ -81,3 +81,8 @@ notification tap, navigate to running command
 start another command when already running - show warning dialog
 
 t. notification tap - nav to running command screen
+
+
+update github readme
+play store description
+screenshots
