@@ -22,6 +22,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,9 +30,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import dev.tberghuis.sshcommandrunner.R
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun Home(
   navigateAddCommand: () -> Unit,
@@ -39,6 +43,15 @@ fun Home(
   navigateEditCommand: (Int) -> Unit,
   vm: HomeViewModel = viewModel()
 ) {
+
+  // permission
+  val notificationsPermissionState =
+    rememberPermissionState(android.Manifest.permission.POST_NOTIFICATIONS)
+  if (!notificationsPermissionState.status.isGranted) {
+    LaunchedEffect(Unit) {
+      notificationsPermissionState.launchPermissionRequest()
+    }
+  }
 
   val commandList by vm.getCommandList().collectAsStateWithLifecycle(initialValue = listOf())
 
