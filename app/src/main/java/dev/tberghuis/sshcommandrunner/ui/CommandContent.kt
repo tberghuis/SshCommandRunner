@@ -143,11 +143,11 @@ fun CommandContent(
       },
       isError = commandScreenState.errorCommand != null,
       keyboardOptions = KeyboardOptions(
-        imeAction = ImeAction.Done
+        imeAction = ImeAction.Next
       ),
-      keyboardActions = KeyboardActions(onNext = {
-        localFocusManager.moveFocus(FocusDirection.Down)
-      }),
+//      keyboardActions = KeyboardActions(onNext = {
+//        localFocusManager.moveFocus(FocusDirection.Down)
+//      }),
     )
 
     Row(
@@ -163,39 +163,51 @@ fun CommandContent(
     }
 
     if (commandScreenState.isLocalPortForward) {
-      Row {
-        OutlinedTextField(
-          value = commandScreenState.localHost,
-          onValueChange = {
-            commandScreenState.localHost = it
-          },
-          label = { Text("local host") },
-        )
-        OutlinedTextField(
-          value = commandScreenState.localPort,
-          onValueChange = {
-            commandScreenState.localPort = it
-          },
-          label = { Text("local port") },
-        )
-      }
-      Row {
-        OutlinedTextField(
-          value = commandScreenState.remoteHost,
-          onValueChange = {
-            commandScreenState.remoteHost = it
-          },
-          label = { Text("remote host") },
-        )
-        OutlinedTextField(
-          value = commandScreenState.remotePort,
-          onValueChange = {
-            commandScreenState.remotePort = it
-          },
-          label = { Text("remote port") },
-        )
+      OutlinedTextField(
+        modifier = Modifier.then(columnWidth),
+        value = commandScreenState.localHost,
+        onValueChange = {
+          commandScreenState.localHost = it
+        },
+        label = { Text("local host") },
+        keyboardOptions = KeyboardOptions(
+          imeAction = ImeAction.Next
+        ),
+      )
+      OutlinedTextField(
+        modifier = Modifier.then(columnWidth),
+        value = commandScreenState.localPort,
+        onValueChange = {
+          commandScreenState.localPort = it
+        },
+        label = { Text("local port") },
+        keyboardOptions = KeyboardOptions(
+          imeAction = ImeAction.Next
+        ),
+      )
 
-      }
+      OutlinedTextField(
+        modifier = Modifier.then(columnWidth),
+        value = commandScreenState.remoteHost,
+        onValueChange = {
+          commandScreenState.remoteHost = it
+        },
+        label = { Text("remote host") },
+        keyboardOptions = KeyboardOptions(
+          imeAction = ImeAction.Next
+        ),
+      )
+      OutlinedTextField(
+        modifier = Modifier.then(columnWidth),
+        value = commandScreenState.remotePort,
+        onValueChange = {
+          commandScreenState.remotePort = it
+        },
+        label = { Text("remote port") },
+        keyboardOptions = KeyboardOptions(
+          imeAction = ImeAction.Next
+        ),
+      )
     }
 
 
