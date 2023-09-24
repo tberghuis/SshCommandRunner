@@ -30,7 +30,7 @@ data class Command(
 
   companion object {
     fun create(id: Int = 0, css: CommandScreenState): Command {
-      return Command(
+      var c = Command(
         id = id,
         title = css.title,
         host = css.host,
@@ -38,6 +38,16 @@ data class Command(
         password = css.password,
         command = css.command,
       )
+      if (css.isLocalPortForward) {
+        c = c.copy(
+          isLocalPortForward = true,
+          localHost = css.localHost,
+          localPort = css.localPort,
+          remoteHost = css.remoteHost,
+          remotePort = css.remotePort
+        )
+      }
+      return c
     }
   }
 }

@@ -36,6 +36,13 @@ class CommandScreenState {
       commandScreenState.user = c.user
       commandScreenState.password = c.password
       commandScreenState.command = c.command
+
+      commandScreenState.isLocalPortForward = c.isLocalPortForward
+      commandScreenState.localHost = c.localHost
+      commandScreenState.localPort = c.localPort
+      commandScreenState.remoteHost = c.remoteHost
+      commandScreenState.remotePort = c.remotePort
+
       return commandScreenState
     }
   }
