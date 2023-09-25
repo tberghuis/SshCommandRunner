@@ -77,6 +77,7 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
     implementation 'androidx.compose.material:material-icons-extended'
 
+    // https://github.com/hierynomus/sshj
     implementation 'com.hierynomus:sshj:0.36.0'
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2'

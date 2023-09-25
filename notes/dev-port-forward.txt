@@ -1,26 +1,10 @@
 
-port forwarding
-
 connect details
-  port 
   private key (file picker)
     passphrase
 
 #########################
 
-manifest xml
-  fresh service, activity
-  hardcode 1 feature at a time
-  invoke adb cli commands.txt (service intent)
-
-check v1.1.0 crash report
-  scope ssh connection lifetime to viewmodel
-
-1 hardcode port forward qbittorrent
-1. service
-... bind
-... button run fuction
-...  
 
 future requirement, run multiple services
 hashmap commandId -> RunningCommandState
@@ -29,67 +13,8 @@ how to do if apilevel in manifest xml
   foregroundServiceType
   mvp android 13 api 33
 
-DeadObjectException???
-
-set minApiLevel to 33 ???
-
-https://github.com/hierynomus/sshj
-
-test emulator foreground service older apilevels
-
-add actions to foreground notification, 
-  hangup/disconnect, meh
-  view output, default action when tap notification
-
-mvp
-  1. rewrite same functionality as now, except foreground service
-      single ssh connection at a time
-  2. add option local port forward
-    [ ] local port forward
-        local host:
-        local port:
-        remote host:
-        remote port:
-
-room migration add port forward to command
-  write tests???
-
-
-buy testing course PL...
-
-t. button hangup
-
-// doitwrong
-run command, if command already
-  if SshController != null
-    if command id != running command id
-      hangup
-  runCommand    
-
-tests.txt
-write list of user actions
-come up with permutations that could be problematic
-PL testing course
-
-cull tmp code
-
-#####################
-
-
-notification tap, navigate to running command
-
 start another command when already running - show warning dialog
-
-t. notification tap - nav to running command screen
-why ain't it showing....
-  no small icon
-make it pinned, can't dismiss
 
 update github readme
 play store description
 screenshots
-
-android docs navigation
-use case, tap navigation to open deep link
-
-https://www.composables.com/tutorials/deeplinks
