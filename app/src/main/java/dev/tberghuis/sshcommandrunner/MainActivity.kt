@@ -1,5 +1,6 @@
 package dev.tberghuis.sshcommandrunner
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,11 +17,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import dev.tberghuis.sshcommandrunner.ui.AddCommand
 import dev.tberghuis.sshcommandrunner.ui.EditCommand
 import dev.tberghuis.sshcommandrunner.ui.Home
 import dev.tberghuis.sshcommandrunner.ui.RunCommand
 import dev.tberghuis.sshcommandrunner.ui.theme.SshCommandRunnerTheme
+import dev.tberghuis.sshcommandrunner.util.logd
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +36,8 @@ class MainActivity : ComponentActivity() {
       }
     }
   }
+
+
 }
 
 
@@ -71,14 +76,14 @@ fun MyAppNavHost(
       )
     }
 
-
-
     composable(
       "command/{id}",
-      arguments = listOf(navArgument("id") { type = NavType.IntType })
+      arguments = listOf(navArgument("id") { type = NavType.IntType }),
+      deepLinks = listOf(navDeepLink {
+        uriPattern = "deeplink://ssh.command.runner/command/{id}"
+      }),
     ) {
       RunCommand()
     }
-
   }
 }

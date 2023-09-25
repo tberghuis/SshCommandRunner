@@ -91,3 +91,5 @@ screenshots
 
 android docs navigation
 use case, tap navigation to open deep link
+
+https://www.composables.com/tutorials/deeplinks
