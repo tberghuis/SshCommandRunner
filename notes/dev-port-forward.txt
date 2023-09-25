@@ -82,7 +82,12 @@ start another command when already running - show warning dialog
 
 t. notification tap - nav to running command screen
 why ain't it showing....
+  no small icon
+make it pinned, can't dismiss
 
 update github readme
 play store description
 screenshots
+
+android docs navigation
+use case, tap navigation to open deep link
