@@ -45,6 +45,8 @@ class SshService : Service() {
 
     sshController?.hangup()
 
+    startForeground(id)
+
     scope.launch(IO) {
       val commandDao = (application as MyApplication).database.commandDao()
       val command = commandDao.loadCommandById(id)
@@ -77,18 +79,18 @@ class SshService : Service() {
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     logd("SshService onStartCommand")
-    startForeground()
+//    startForeground()
     return START_NOT_STICKY
   }
 
-  private fun startForeground() {
-    startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
+  private fun startForeground(commandId: Int) {
+    startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification(commandId))
   }
 
-  private fun buildNotification(): Notification {
+  private fun buildNotification(commandId: Int): Notification {
     val intent = Intent(
       Intent.ACTION_VIEW,
-      Uri.parse("deeplink://ssh.command.runner/command/3")
+      Uri.parse("deeplink://ssh.command.runner/command/$commandId")
     )
     val pendingIntent = PendingIntent.getActivity(
       this,

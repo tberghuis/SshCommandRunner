@@ -30,8 +30,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun RunCommand(
   vm: RunCommandViewModel = viewModel()
 ) {
+  // doitwrong
+  val topBarText = if (vm.command == null) {
+    ""
+  } else vm.command!!.title
+
   Scaffold(
-    topBar = { TopAppBar(title = { Text("Run Command") }) },
+    topBar = { TopAppBar(title = { Text(topBarText) }) },
     bottomBar = {
       BottomAppBar {
         // wrong way of centering button
@@ -62,7 +67,6 @@ fun RunCommandContent(
       lazyListState.animateScrollToItem(vm.commandOutput.lastIndex)
     }
   }
-
   LazyColumn(
     modifier = Modifier
       .padding(padding)
