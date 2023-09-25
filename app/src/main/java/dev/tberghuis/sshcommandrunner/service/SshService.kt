@@ -103,6 +103,7 @@ class SshService : Service() {
       NotificationCompat.Builder(this, NOTIFICATION_CHANNEL).setContentTitle("SSH command running")
         .setSmallIcon(R.mipmap.ic_launcher)
         .setContentIntent(pendingIntent)
+        .setOngoing(true)
         .build()
     return notification
   }
