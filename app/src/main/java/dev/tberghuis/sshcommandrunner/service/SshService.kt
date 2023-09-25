@@ -90,13 +90,19 @@ class SshService : Service() {
       Intent.ACTION_VIEW,
       Uri.parse("deeplink://ssh.command.runner/command/3")
     )
-    val pendingIntent = PendingIntent.getActivity(this, REQUEST_CODE_VIEW_SSH_COMMAND, intent, PendingIntent.FLAG_IMMUTABLE)
+    val pendingIntent = PendingIntent.getActivity(
+      this,
+      REQUEST_CODE_VIEW_SSH_COMMAND,
+      intent,
+      PendingIntent.FLAG_IMMUTABLE
+    )
 
     val notification: Notification =
       NotificationCompat.Builder(this, NOTIFICATION_CHANNEL).setContentTitle("SSH command running")
         .setSmallIcon(R.mipmap.ic_launcher)
         .setContentIntent(pendingIntent)
         .setOngoing(true)
+        .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
         .build()
     return notification
   }
